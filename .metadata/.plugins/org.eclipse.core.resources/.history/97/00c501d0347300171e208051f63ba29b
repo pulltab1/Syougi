@@ -1,0 +1,11 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import piece.Fu;
+import piece.Piece;
+
+public class Inventory implements Cloneable{
+
+}

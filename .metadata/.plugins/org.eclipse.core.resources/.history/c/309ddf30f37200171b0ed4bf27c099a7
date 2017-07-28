@@ -1,0 +1,63 @@
+package board;
+
+import exception.PlayerFullException;
+import piece.Operation;
+import piece.Ou;
+import piece.Piece;
+
+public class Game {
+	public static final int MAX_PLAYER = 2;
+	private Board board = new Board();
+	private Player[] player = new Player[MAX_PLAYER];
+	private Inventory[] inventory = new Inventory[MAX_PLAYER];
+	private int playerCount;
+	
+	public Game(){}
+	
+	public int getPlayerCount(){
+		return playerCount;
+	}
+	public void joinPlayer(Player player) throws PlayerFullException, CloneNotSupportedException{
+		if(playerCount >= MAX_PLAYER)throw new PlayerFullException();
+		this.player[playerCount] = player.clone();
+		this.inventory[playerCount] = new Inventory();
+		playerCount++;
+	}
+	public boolean turn(int turncount){
+		for(int i=0;i<MAX_PLAYER;i++){
+			try{
+				System.out.println("[Player "+(i+1)+"]"+"(Turn "+turncount+")");
+				Operation operation = player[i].turn(board.clone());
+				if(operation.getPiece()!=null){
+					Piece piece = board.movePiece(player[i],operation);
+					if(piece!=null){
+						inventory[i].putInventory(piece);
+					}
+					if(piece instanceof Ou){
+						System.out.println("Winner "+(i+1)+"");
+						return true;
+					}
+				}
+				else{
+					inventory[i].takeInventory(operation.getClass());
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				return true;
+			}
+		}
+		return false;
+	}
+	public void play(){
+		int tur‚Žcount = 0;
+		System.out.println("[Default]");
+		board.draw();
+		for(int i=0;i<MAX_PLAYER;i++){player[i].setup();}
+		while(true){
+			if(turn(tur‚Žcount)){
+				break;
+			}
+		}
+	}
+}

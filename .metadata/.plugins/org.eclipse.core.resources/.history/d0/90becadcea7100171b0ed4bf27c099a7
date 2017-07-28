@@ -1,0 +1,15 @@
+package board;
+
+import common.Position;
+import exception.NotMovableException;
+
+public class Operation {
+	private Position position;
+	private Position target;
+	public Operation(Position position,Position targer){
+		this.position = position;
+		this.target = targer;
+	}
+	public Position getPosition(){return position;}
+	public Position getTarget(){return target;}
+}

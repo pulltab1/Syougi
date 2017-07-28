@@ -5,44 +5,93 @@ import java.util.List;
 
 import board.Board;
 import common.Position;
-import exception.NotMovableException;
 
-public class Piece {
-	protected Position position;
-	protected List<Position> moveOperation;
+public class Piece implements Cloneable{
+	protected List<Position> moveOperation = new ArrayList<Position>();
 	protected char name;
-	protected boolean isKing;
-	
-	public Piece(Position position){
-		this.position = new Position(position);
+	protected boolean isOpponent;
+
+	public Piece(boolean isOpponent){
+		this.isOpponent = isOpponent;
 	}
 	
-	protected void setMoveOperation(List<Position> moveOperation){
-		this.moveOperation = new ArrayList<>(moveOperation);
+	public Piece(Piece piece){
+		this.name = piece.getName();
+		this.moveOperation = piece.getMoveOperation();
+		this.isOpponent = piece.isOpponent();
 	}
 	
-	public int getX(){return position.getX();}
-	public int getY(){return position.getY();}
-	public char getName(){return name;}
+	public Piece(Piece piece,boolean isOpponent){
+		this.name = piece.getName();
+		this.moveOperation = piece.getMoveOperation();
+		this.isOpponent = isOpponent;
+	}
 	
-	public boolean checkMovableTarget(Position target){
+	protected void setMoveOperation(List<Position> operation,boolean isOpponent){
+		moveOperation.clear();
+		for(Position op : operation){
+			int x = op.getX();
+			int y = op.getY();
+			if(isOpponent){
+				x *= -1;
+				y *= -1;
+			}
+			moveOperation.add(new Position(x,y));
+		}
+	}
+	public List<Position> getMoveOperation(){
+		return new ArrayList<Position>(moveOperation);
+	}
+	public char getName(){
+		return name;
+	}
+	public boolean isOpponent(){
+		return isOpponent;
+	}
+ 	public boolean checkMovable(Operation operation,Piece[][] board,boolean isOpponent){
+		if(this.isOpponent != isOpponent)
+			return false;
+
+		boolean isStop = false;
 		for(Position op : moveOperation){
-			int x = position.getX() + op.getX();
-			int y = position.getY() + op.getY();
-			if( x < 0 && y < 0 && x > Board.BOARD_SIZE && y > Board.BOARD_SIZE &&
-				x == target.getX() && y == target.getY()){
-				return true;
+			int x;
+			int y;
+			x = operation.getPosition().getX() + op.getX();
+			y = operation.getPosition().getY() + op.getY();
+
+			boolean isGet = false;
+			if( x >= 0 && y >= 0 && x < Board.BOARD_SIZE && y < Board.BOARD_SIZE ){
+				if(op.getX() == 0 && op.getY() == 0){
+					isStop = false;
+				}
+				else{
+					if(!isStop && board[x][y] != null){
+						if(board[x][y].isOpponent() == isOpponent){
+							isStop = true;
+						}
+						if(board[x][y].isOpponent() != isOpponent){
+							isGet = true;
+						}
+					}
+					if(x == operation.getTarget().getX() && y == operation.getTarget().getY()){
+						return !isStop;
+					}
+					if(isGet){
+						isStop = true;
+					}
+				}
 			}
 		}
+		
 		return false;
 	}
-	
-	public void move(Position target) throws NotMovableException{
-		if(!checkMovableTarget(target))
-			throw new NotMovableException();
-		position.set(target);
+	@Override
+	public Piece clone(){
+		try {
+			return (Piece)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	
-	public boolean getKing(){return isKing;}
-	
 }

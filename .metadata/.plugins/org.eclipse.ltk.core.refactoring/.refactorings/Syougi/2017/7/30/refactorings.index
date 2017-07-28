@@ -1,0 +1,8 @@
+1501063919884	Move compilation unit
+1501067993924	Rename type 'PieceMovable'
+1501068118448	Delete element
+1501149233040	Delete element
+1501172565302	Rename type 'MovableOperation'
+1501172614122	Rename type 'MoveOperation'
+1501173167079	Delete element
+1501177904506	Rename type 'NotMovableException'

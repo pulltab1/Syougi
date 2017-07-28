@@ -6,20 +6,42 @@ import java.util.List;
 import board.Board;
 import common.Position;
 
-public class Hisya extends Piece{
+public class Hisya extends Piece implements Reversible{
 
-	public Hisya(Position position) {
-		super(position);
+	public Hisya(boolean isOpponent) {
+		super(isOpponent);
 		name = '”ò';
 		
 		List<Position> moveoperation = new ArrayList<>();
-		for(int i=1;i<Board.BOARD_SIZE;i++){
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(0,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(0,-i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(i,0));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(-i,0));
-		}
-		setMoveOperation(moveoperation);
+		setMoveOperation(moveoperation,isOpponent);
 	}
-	
+
+	@Override
+	public void reverse() {
+		List<Position> moveoperation = new ArrayList<>();
+		name = '—´';
+		moveoperation.add(new Position(-1,1));
+		moveoperation.add(new Position(0,1));
+		moveoperation.add(new Position(1,1));
+		moveoperation.add(new Position(-1,0));
+		moveoperation.add(new Position(1,0));
+		moveoperation.add(new Position(0,-1));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(0,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(0,-i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(i,0));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(-i,0));
+		setMoveOperation(moveoperation,isOpponent);
+	}
 }

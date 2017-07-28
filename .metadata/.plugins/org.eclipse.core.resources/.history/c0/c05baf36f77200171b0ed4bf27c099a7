@@ -1,0 +1,48 @@
+package AI;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import board.Board;
+import board.Inventory;
+import board.Player;
+import common.Position;
+import piece.Operation;
+
+public class PlayerControl extends Player{
+
+	public PlayerControl(boolean isOpponent) {
+		super(isOpponent);
+		
+	}
+
+	@Override
+	public void setup() {
+	}
+
+	@Override
+	public Operation turn(Board board, Inventory inventory){
+		while(true){
+			board.draw();
+			inventory.draw();
+			System.out.println("“®‚©‚·‹î‚Æ‚»‚ÌˆÚ“®æ‚ğ“ü—Í<px,py,tx,ty>");
+			InputStreamReader isr = new InputStreamReader(System.in);
+			BufferedReader br = new BufferedReader(isr);
+			try {
+				String[] buf = br.readLine().split(",");
+				if(buf.length == 3){
+					inventory.takePiece();
+				}
+				if(buf.length == 4){
+					Position p = new Position(Integer.parseInt(buf[0]),Integer.parseInt(buf[1]));
+					Position t = new Position(Integer.parseInt(buf[2]),Integer.parseInt(buf[3]));
+					Operation operation = new Operation(p,t);
+					if(board.checkMovable(operation,isOpponent())){
+						return operation;
+					}
+				}
+			} catch (Exception e) {}
+			System.err.println("‚¤‚²‚¯‚È‚ ‚ ‚ ‚ ‚ ‚ ‚¢");
+		}
+	}
+}

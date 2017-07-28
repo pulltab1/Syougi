@@ -1,29 +1,68 @@
 package board;
 
-
+import common.Position;
 import exception.PlayerFullException;
+import piece.Operation;
+import piece.Ou;
+import piece.Piece;
 
 public class Game {
 	public static final int MAX_PLAYER = 2;
 	private Board board = new Board();
 	private Player[] player = new Player[MAX_PLAYER];
+	private Inventory[] inventory = new Inventory[MAX_PLAYER];
 	private int playerCount;
 	
-	public Game(){
-	}
+	public Game(){}
 	
-	public int getPlayerCount(){return playerCount;}
+	public int getPlayerCount(){
+		return playerCount;
+	}
 	public void joinPlayer(Player player) throws PlayerFullException, CloneNotSupportedException{
 		if(playerCount >= MAX_PLAYER)throw new PlayerFullException();
 		this.player[playerCount] = player.clone();
+		this.inventory[playerCount] = new Inventory();
 		playerCount++;
 	}
-	public int play(){
+	public boolean turn(int turncount){
+		for(int i=0;i<MAX_PLAYER;i++){
+			try{
+				System.out.println("[Player "+(i+1)+"]"+"(Turn "+turncount+")");
+				Operation operation = player[i].turn(board.clone(),inventory[i].clone());
+				if(operation.getPosition()!=null){
+					Piece piece = board.movePiece(player[i],operation);
+					if(piece!=null){
+						inventory[i].add(piece,player[i].isOpponent());
+					}
+					if(piece instanceof Ou){
+						System.out.println("Winner "+(i+1)+"");
+						return true;
+					}
+				}
+				else{
+					System.out.println(operation.getPiece());
+					int index = inventory[i].indexOf(operation.getPiece());
+					Position target = operation.getTarget();
+					if(board.getBoard()[target.getX()][target.getY()]==null){
+						board.setPiece(operation);
+						inventory[i].remove(index);
+					}
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				return true;
+			}
+		}
+		return false;
+	}
+	public void play(){
+		int tur‚Žcount = 0;
 		for(int i=0;i<MAX_PLAYER;i++){player[i].setup();}
 		while(true){
-			for(int i=0;i<MAX_PLAYER;i++){
-				player[i].turn();
-				
+			tur‚Žcount++;
+			if(turn(tur‚Žcount)){
+				break;
 			}
 		}
 	}

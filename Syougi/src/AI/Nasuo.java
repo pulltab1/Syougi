@@ -1,21 +1,45 @@
 package AI;
 
+import java.util.List;
+
 import board.Board;
-import board.Operation;
+import board.Inventory;
 import board.Player;
 import common.Position;
-import piece.Ou;
-import piece.Piece;
+import piece.Operation;
 
 public class Nasuo extends Player{
+
+	public Nasuo(boolean isOpponent) {
+		super(isOpponent);
+		
+	}
 
 	@Override
 	public void setup() {
 	}
 
 	@Override
-	public Operation turn() {
-		return new Operation(getBoard().get(0),new Position(0,1));
+	public Operation turn(Board board, Inventory inventory){
+		board.draw();
+		inventory.draw();
+		for(int i=0;i<Board.BOARD_SIZE;i++){
+			for(int j=0;j<Board.BOARD_SIZE;j++){
+				if(board.getBoard()[j][i]!=null){
+					List<Position> op = board.getBoard()[j][i].getMoveOperation();
+					for(int k=op.size()-1;k>=0;k--){
+						int x = op.get(k).getX();
+						int y = op.get(k).getY();
+						Operation operation = new Operation(new Position(j,i),new Position(j+x,i+y));
+						if(!isOpponent()&&y < 0)continue;
+						if(isOpponent()&&y > 0)continue;
+						if(board.checkMovable(operation,isOpponent())==true){
+							return operation;
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
-
 }

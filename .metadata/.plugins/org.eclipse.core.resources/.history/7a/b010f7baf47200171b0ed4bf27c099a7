@@ -1,0 +1,26 @@
+package board;
+
+import piece.Operation;
+
+public abstract class Player implements Cloneable{
+	private boolean isOpponent;
+	public abstract void setup();
+	public abstract Operation turn(Board board);
+	public boolean isOpponent(){
+		return isOpponent;
+	}
+	
+	public Player(boolean isOpponent){
+		this.isOpponent = isOpponent;
+	}
+	
+	@Override
+    public Player clone(){
+        try {
+			return (Player)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+    }
+}

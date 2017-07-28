@@ -1,0 +1,55 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import piece.Piece;
+
+public class Inventory implements Cloneable{
+
+	private List<Piece> inventory = new List<Piece>();
+	
+	public void putPiece(Piece piece){
+		if(inventory.get(piece.getClass()) == null){
+			inventory.put(piece.getClass(),new ArrayList<Piece>());
+		}
+		inventory.get(piece.getClass()).add(piece);
+	}
+	
+	public Piece takePiece(Class<? extends Piece> cls){
+		List<Piece> list = inventory.get(cls);
+		if(list.size() == 0)return null;
+		return list.remove(0);
+	}
+	
+	public List<Piece> getPiece(){
+		List<Piece> list = new ArrayList<Piece>();
+		for(Map.Entry<Class<? extends Piece>,List<Piece>> inv : inventory.entrySet()) {
+			for(Piece piece : inv.getValue()){
+		    	list.add(piece);
+		    }
+		}
+		return list;
+	}
+	
+	public void draw(){
+		System.out.print("[Inventory]:");
+		for(Map.Entry<Class<? extends Piece>,List<Piece>> inv : inventory.entrySet()) {
+			for(Piece piece : inv.getValue()){
+		    	System.out.print(piece.getName());
+		    }
+		}
+		System.out.println();
+	}
+	@Override
+    public Inventory clone(){
+        try {
+			return (Inventory)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+    }
+}

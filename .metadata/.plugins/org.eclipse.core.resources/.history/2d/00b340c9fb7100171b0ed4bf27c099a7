@@ -1,0 +1,42 @@
+package piece;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import board.Board;
+import common.Position;
+
+public class Kaku extends Piece implements Reversible{
+
+	public Kaku(int playerNumber) {
+		super(playerNumber);
+		name = 'Šp';
+		
+		List<Position> moveoperation = new ArrayList<>();
+		for(int i=1;i<Board.BOARD_SIZE;i++){
+			moveoperation.add(new Position(-i,i));
+			moveoperation.add(new Position(i,i));
+			moveoperation.add(new Position(-i,-i));
+			moveoperation.add(new Position(i,i));
+		}
+		setMoveOperation(moveoperation);
+	}
+	@Override
+	public void reverse() {
+		List<Position> moveoperation = new ArrayList<>();
+		for(int i=1;i<Board.BOARD_SIZE;i++){
+			moveoperation.add(new Position(-i,i));
+			moveoperation.add(new Position(i,i));
+			moveoperation.add(new Position(-i,-i));
+			moveoperation.add(new Position(i,i));
+		}
+		moveoperation.add(new Position(-1,1));
+		moveoperation.add(new Position(0,1));
+		moveoperation.add(new Position(1,1));
+		moveoperation.add(new Position(-1,0));
+		moveoperation.add(new Position(1,0));
+		moveoperation.add(new Position(0,-1));
+		setMoveOperation(moveoperation);
+	}
+	
+}

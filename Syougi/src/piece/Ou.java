@@ -7,10 +7,9 @@ import common.Position;
 
 public class Ou extends Piece{
 
-	public Ou(Position position) {
-		super(position);
+	public Ou(boolean Opponent) {
+		super(Opponent);
 		name = '‰¤';
-		isKing = true;
 		
 		List<Position> moveoperation = new ArrayList<>();
 		moveoperation.add(new Position(-1,1));
@@ -21,7 +20,7 @@ public class Ou extends Piece{
 		moveoperation.add(new Position(-1,-1));
 		moveoperation.add(new Position(0,-1));
 		moveoperation.add(new Position(1,-1));
-		setMoveOperation(moveoperation);
+		setMoveOperation(moveoperation,isOpponent);
 	}
 
 	

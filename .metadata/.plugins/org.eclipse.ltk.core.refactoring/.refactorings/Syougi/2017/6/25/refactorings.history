@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;piece.Reverce&apos; to &apos;Reverse&apos;&#x0D;&#x0A;- Original project: &apos;Syougi&apos;&#x0D;&#x0A;- Original element: &apos;piece.Reverce&apos;&#x0D;&#x0A;- Renamed element: &apos;piece.Reverse&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Reverce&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;piece{Reverce.java[Reverce" matchStrategy="1" name="Reverse" qualified="false" references="true" similarDeclarations="false" stamp="1498139776380" textual="false" version="1.0"/>
+</session>

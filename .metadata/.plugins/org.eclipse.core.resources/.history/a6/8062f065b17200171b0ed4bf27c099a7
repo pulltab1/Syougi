@@ -1,0 +1,49 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import common.Position;
+import exception.EmptyPieceInventory;
+import piece.Fu;
+import piece.Kin;
+import piece.Operation;
+import piece.Ou;
+import piece.Piece;
+
+public abstract class Player implements Cloneable{
+	private boolean isOpponent;
+	public abstract void setup();
+	public abstract Operation turn(Board board);
+	public boolean isOpponent(){
+		return isOpponent;
+	}
+	private Map<Class<? extends Piece>,List<Piece>> inventory =
+			new HashMap<Class<? extends Piece>, List<Piece>>();
+	
+	public Player(boolean isOpponent){
+		this.isOpponent = isOpponent;
+		takeInventory(Kin.class);
+	}
+	
+	public void putInventory(Piece piece){
+		if(inventory.get(piece.getClass()) == null){
+			inventory.put(piece.getClass(),new ArrayList<Piece>());
+		}
+		inventory.get(piece.getClass()).add(piece);
+		
+	}
+	
+	public Piece takeInventory(Class<? extends Piece> cls) throws EmptyPieceInventory{
+		List<Piece> list = inventory.get(cls);
+		if(list.size() == 0)throw new EmptyPieceInventory();
+		return inventory.get(cls).remove(0);
+	}
+	
+	@Override
+    public Player clone() throws CloneNotSupportedException {
+        return (Player)super.clone();
+    }
+}

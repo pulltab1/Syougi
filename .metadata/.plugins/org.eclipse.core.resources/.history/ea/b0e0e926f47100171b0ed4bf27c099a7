@@ -1,0 +1,11 @@
+package piece;
+
+import java.util.List;
+
+import common.Position;
+
+public abstract class PieceMovable {
+	public static List<Position> getMovableDistance(){
+		
+	}
+}

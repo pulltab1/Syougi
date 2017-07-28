@@ -1,0 +1,15 @@
+package piece;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import common.Position;
+
+public class Kin extends Piece{
+	public Kin(int playerNumber) {
+		super(playerNumber);
+		name = '‹à';
+		setMoveOperation(moveoperation);
+	}
+	
+}

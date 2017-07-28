@@ -1,0 +1,24 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import common.Position;
+import piece.Fu;
+import piece.Operation;
+import piece.Ou;
+import piece.Piece;
+
+public abstract class Player implements Cloneable{
+	public abstract void setup();
+	public abstract Operation turn();
+	
+	private List<Piece> inventory = new ArrayList<>();
+	
+	public Player(){}
+	public List<Piece> getBoard(){return board;}
+	@Override
+    public Player clone() throws CloneNotSupportedException {
+        return (Player)super.clone();
+    }
+}

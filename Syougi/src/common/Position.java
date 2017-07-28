@@ -1,12 +1,10 @@
 package common;
 
-public class Position {
+
+public class Position implements Cloneable{
 	private int x;
 	private int y;
 
-	public Position(Position position){
-		set(position.getX(),position.getY());
-	}
 	public Position(int x,int y){
 		set(x,y);
 	}
@@ -20,4 +18,14 @@ public class Position {
 	}
 	public int getX(){return x;}
 	public int getY(){return y;}
+	
+	@Override
+    public Position clone(){
+        try {
+			return (Position)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+    }
 }

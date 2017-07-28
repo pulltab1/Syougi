@@ -1,0 +1,52 @@
+package board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import piece.Piece;
+
+public class Inventory implements Cloneable{
+
+	private List<Piece> inventory = new ArrayList<Piece>();
+	
+	public void putPiece(Piece piece){
+		inventory.add(piece);
+	}
+	
+	public Piece takePiece(int index){
+		if(inventory.size() == 0){
+			return null;
+		}
+		return inventory.remove(0);
+	}
+	
+	public int indexOf(Piece piece){
+		return inventory.indexOf(piece);
+	}
+	
+	public List<Piece> getPiece(){
+		return new ArrayList<Piece>(inventory);
+	}
+	
+	public int getSize(){
+		return inventory.size();
+	}
+	
+	public void draw(){
+		System.out.print("[Inventory]:");
+		for(Piece piece : inventory){
+	    	System.out.print(piece.getName());
+	    }
+	
+		System.out.println();
+	}
+	@Override
+    public Inventory clone(){
+        try {
+			return (Inventory)super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+    }
+}

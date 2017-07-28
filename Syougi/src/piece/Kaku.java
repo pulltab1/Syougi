@@ -6,20 +6,42 @@ import java.util.List;
 import board.Board;
 import common.Position;
 
-public class Kaku extends Piece{
+public class Kaku extends Piece implements Reversible{
 
-	public Kaku(Position position) {
-		super(position);
+	public Kaku(boolean isOpponent) {
+		super(isOpponent);
 		name = 'Šp';
 		
 		List<Position> moveoperation = new ArrayList<>();
-		for(int i=1;i<Board.BOARD_SIZE;i++){
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(-i,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(i,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(-i,-i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
 			moveoperation.add(new Position(i,i));
-		}
-		setMoveOperation(moveoperation);
+		setMoveOperation(moveoperation,isOpponent);
+	}
+	@Override
+	public void reverse() {
+		List<Position> moveoperation = new ArrayList<>();
+		name = '—´';
+		moveoperation.add(new Position(-1,1));
+		moveoperation.add(new Position(0,1));
+		moveoperation.add(new Position(1,1));
+		moveoperation.add(new Position(-1,0));
+		moveoperation.add(new Position(1,0));
+		moveoperation.add(new Position(0,-1));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(-i,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(i,i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(-i,-i));
+		for(int i=0;i<Board.BOARD_SIZE;i++)
+			moveoperation.add(new Position(i,i));
+		setMoveOperation(moveoperation,isOpponent);
 	}
 	
 }

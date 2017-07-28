@@ -1,0 +1,9 @@
+package piece;
+
+import java.util.List;
+
+import common.Position;
+
+public interface PieceMovable {
+	public static List<Position> getMovablePosition() {return null;}
+}

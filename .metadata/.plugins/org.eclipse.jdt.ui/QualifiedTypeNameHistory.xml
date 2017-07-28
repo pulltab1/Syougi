@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="piece.Reverse"/>
+<fullyQualifiedTypeName name="board.Operation"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="piece.Movable"/>
+<fullyQualifiedTypeName name="board.Game"/>
+<fullyQualifiedTypeName name="AI.Nasuo"/>
+<fullyQualifiedTypeName name="board.Board"/>
+<fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction"/>
+<fullyQualifiedTypeName name="piece.Kyousya"/>
+<fullyQualifiedTypeName name="piece.Keima"/>
+<fullyQualifiedTypeName name="piece.Gin"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="exception.EmptyPieceInventory"/>
+<fullyQualifiedTypeName name="java.util.Map.Entry"/>
+<fullyQualifiedTypeName name="exception.NotMovableException"/>
+<fullyQualifiedTypeName name="piece.Kin"/>
+<fullyQualifiedTypeName name="piece.Ou"/>
+<fullyQualifiedTypeName name="piece.Reversible"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="piece.Operation"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="exception.CannotSetPiece"/>
+<fullyQualifiedTypeName name="java.lang.Cloneable"/>
+<fullyQualifiedTypeName name="AI.PlayerControl"/>
+<fullyQualifiedTypeName name="piece.Piece"/>
+<fullyQualifiedTypeName name="piece.Hisya"/>
+<fullyQualifiedTypeName name="piece.Kaku"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="piece.Fu"/>
+<fullyQualifiedTypeName name="board.Inventory"/>
+<fullyQualifiedTypeName name="common.Position"/>
+</qualifiedTypeNameHistroy>

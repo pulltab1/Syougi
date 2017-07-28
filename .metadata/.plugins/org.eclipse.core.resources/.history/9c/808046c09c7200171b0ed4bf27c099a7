@@ -1,0 +1,16 @@
+package piece;
+
+import common.Position;
+
+public class Operation {
+	private Position position;
+	private Position target;
+	public Operation(Position position,Position targer){
+		this.position = position;
+		this.target = targer;
+	}
+	public Position getPosition(){return new Position(position);}
+	public Position getTarget(boolean isOpponent){
+		return target.clone();
+	}
+}

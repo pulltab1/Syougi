@@ -1,0 +1,18 @@
+package piece;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import common.Position;
+
+public class MoveList extends ArrayList<Position>{
+	@Override
+	public boolean add(Position p){
+		return false;
+		
+	}
+	
+}

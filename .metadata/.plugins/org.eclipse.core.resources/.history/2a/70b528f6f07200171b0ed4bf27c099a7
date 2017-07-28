@@ -1,0 +1,25 @@
+package piece;
+
+import common.Position;
+
+public class Operation {
+	private Position position;
+	private Position target;
+	private Piece piece;
+	public Operation(Position position,Position targer){
+		this.position = position;
+		this.target = targer;
+		this.piece = null;
+	}
+	public Operation(Piece piece,Position targer){
+		this.piece = piece;
+		this.target = targer;
+		this.position = null;
+	}
+	public Position getPosition(){
+		return position.clone();
+	}
+	public Position getTarget(){
+		return target.clone();
+	}
+}
